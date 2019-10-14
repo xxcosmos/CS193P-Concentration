@@ -12,6 +12,10 @@
 		BD890FE62354478E00B0106D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD890FE42354478E00B0106D /* Main.storyboard */; };
 		BD890FE82354478F00B0106D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD890FE72354478F00B0106D /* Assets.xcassets */; };
 		BD890FEB2354478F00B0106D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD890FE92354478F00B0106D /* LaunchScreen.storyboard */; };
+		BD890FF623544CF100B0106D /* Concentration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD890FF523544CF100B0106D /* Concentration.swift */; };
+		BD890FF823544D5C00B0106D /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD890FF723544D5C00B0106D /* Card.swift */; };
+		BD890FFA2354857900B0106D /* CommonUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD890FF92354857900B0106D /* CommonUtil.swift */; };
+		BD890FFC235496A000B0106D /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD890FFB235496A000B0106D /* Theme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,10 @@
 		BD890FE72354478F00B0106D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BD890FEA2354478F00B0106D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BD890FEC2354478F00B0106D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BD890FF523544CF100B0106D /* Concentration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concentration.swift; sourceTree = "<group>"; };
+		BD890FF723544D5C00B0106D /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		BD890FF92354857900B0106D /* CommonUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUtil.swift; sourceTree = "<group>"; };
+		BD890FFB235496A000B0106D /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +62,42 @@
 		BD890FDF2354478E00B0106D /* Concentration */ = {
 			isa = PBXGroup;
 			children = (
-				BD890FE02354478E00B0106D /* AppDelegate.swift */,
-				BD890FE22354478E00B0106D /* ViewController.swift */,
-				BD890FE42354478E00B0106D /* Main.storyboard */,
+				BD890FF423544CC500B0106D /* Model */,
+				BD890FF3235447FB00B0106D /* Controller */,
+				BD890FF2235447DC00B0106D /* View */,
 				BD890FE72354478F00B0106D /* Assets.xcassets */,
-				BD890FE92354478F00B0106D /* LaunchScreen.storyboard */,
 				BD890FEC2354478F00B0106D /* Info.plist */,
+				BD890FF92354857900B0106D /* CommonUtil.swift */,
 			);
 			path = Concentration;
+			sourceTree = "<group>";
+		};
+		BD890FF2235447DC00B0106D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BD890FE42354478E00B0106D /* Main.storyboard */,
+				BD890FE92354478F00B0106D /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		BD890FF3235447FB00B0106D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				BD890FE02354478E00B0106D /* AppDelegate.swift */,
+				BD890FE22354478E00B0106D /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		BD890FF423544CC500B0106D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BD890FF523544CF100B0106D /* Concentration.swift */,
+				BD890FF723544D5C00B0106D /* Card.swift */,
+				BD890FFB235496A000B0106D /* Theme.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +173,10 @@
 			files = (
 				BD890FE32354478E00B0106D /* ViewController.swift in Sources */,
 				BD890FE12354478E00B0106D /* AppDelegate.swift in Sources */,
+				BD890FF623544CF100B0106D /* Concentration.swift in Sources */,
+				BD890FFC235496A000B0106D /* Theme.swift in Sources */,
+				BD890FFA2354857900B0106D /* CommonUtil.swift in Sources */,
+				BD890FF823544D5C00B0106D /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
