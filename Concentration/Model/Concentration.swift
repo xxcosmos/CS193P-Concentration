@@ -53,7 +53,7 @@ class Concentraton {
             }
             flipCount+=1
             cards[index].isFaceUp = true
-            if cards[matchIndex].identifier == cards[index].identifier{
+            if cards[matchIndex] == cards[index]{
                 score+=2
                 cards[matchIndex].isMatched = true
                 cards[index].isMatched = true

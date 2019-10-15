@@ -13,14 +13,18 @@ class ViewController: UIViewController {
     // important lazy
     private lazy var game = Concentraton()
     
-    private var emojiChoices = [String]()
+    private var emojiChoices:String?
     private var theme:Theme?
-    private var emoji = [Int:String]()
+    private var emoji = [Card:String]()
     private var themeList = [Theme]()
     
     
     
-    @IBOutlet private weak var flipCountLabel: UILabel!
+    @IBOutlet private weak var flipCountLabel: UILabel! {
+        didSet{
+            updateFlipCountLabel()
+        }
+    }
     @IBOutlet private weak var themeLabel: UILabel!
     @IBOutlet private weak var scoreLabel: UILabel!
     
@@ -32,7 +36,7 @@ class ViewController: UIViewController {
         view.backgroundColor = theme!.backgroundColor
         emojiChoices = theme!.emojiChoices
         game = Concentraton(numberOfPairsOfCards: (cardButtons.count+1)/2)
-        emoji = [Int:String]()
+        emoji = [Card:String]()
         themeLabel.text = "Theme: \(theme!.themeName)"
         updataViewFromModel()
         
@@ -48,8 +52,16 @@ class ViewController: UIViewController {
         }
     }
     
+    private func updateFlipCountLabel(){
+        let attributes: [NSAttributedStringKey: Any] = [
+            .strokeWidth : 5.0,
+            .strokeColor : #colorLiteral(red: 1, green: 0.5781051517, blue: 0, alpha: 1)
+        ]
+        let attributedString = NSAttributedString(string: "Flips: \(game.flipCount)", attributes: attributes)
+        flipCountLabel.attributedText = attributedString
+    }
     private func updataViewFromModel() {
-        flipCountLabel.text = "Flips: \(game.flipCount)"
+        updateFlipCountLabel()
         scoreLabel.text = "Score: \(game.score)"
         for index in cardButtons.indices{
             let button = cardButtons[index]
@@ -72,20 +84,20 @@ class ViewController: UIViewController {
     }
     
     private func emoji(for card: Card) -> String {
-        if emoji[card.identifier] == nil,emojiChoices.count>0 {
-            let randomIndex = emojiChoices.count.arc4random()
-            emoji[card.identifier] = emojiChoices.remove(at: randomIndex)
+        if emoji[card] == nil,emojiChoices!.count>0 {
+            let randomStringIndex = emojiChoices!.index(emojiChoices!.startIndex, offsetBy: emojiChoices!.count.arc4random())
+            emoji[card] = String(emojiChoices!.remove(at: randomStringIndex))
         }
-        return emoji[card.identifier] ?? "?"
+        return emoji[card] ?? "?"
     }
     
     private func themeInit() {
-        let animalTheme = Theme(themeName: "Animal", backgroundColor: .orange, cardBackColor: .red, emojiChoices: ["🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", "🐨", "🐯", "🦁", "🐮"])
-        let sportTheme = Theme(themeName: "Sport", backgroundColor: .blue, cardBackColor: .green, emojiChoices: ["⚽️", "🏀", "🏈", "⚾️", "🎾", "🏐", "🏉", "🎱", "🏓", "🏸", "🥅", "🏒"])
-        let faceTheme = Theme(themeName: "Face", backgroundColor: .yellow, cardBackColor: .white, emojiChoices: ["😀", "😃", "😄", "😁", "😆", "😅", "😂", "🤣", "☺️", "😊", "😇", "🙂"])
-        let carTheme = Theme(themeName: "Car", backgroundColor: .black, cardBackColor:.gray, emojiChoices: ["🚗", "🚕", "🚙", "🚌", "🚎", "🏎", "🚓", "🚑", "🚒", "🚐", "🚚", "🚛"])
-        let flagTheme = Theme(themeName: "Flag", backgroundColor: .white, cardBackColor: .darkGray, emojiChoices: ["🇰🇷", "🇯🇵", "🏳️", "🏴", "🏁", "🚩", "🏳️‍🌈", "🇱🇷", "🎌", "🇨🇦", "🇳🇵", "🇬🇪"])
-        let fruitTheme = Theme(themeName: "Fruit", backgroundColor: .green, cardBackColor: .yellow, emojiChoices: ["🍏", "🍎", "🍐", "🍊", "🍋", "🍌", "🍉", "🍇", "🍓", "🍈", "🍒", "🍑"])
+        let animalTheme = Theme(themeName: "Animal", backgroundColor: .orange, cardBackColor: .red, emojiChoices: "🐶🐱🐭🐹🐰🦊🐻🐼🐨🐯🦁🐮")
+        let sportTheme = Theme(themeName: "Sport", backgroundColor: .blue, cardBackColor: .green, emojiChoices: "⚽️🏀🏈⚾️🎾🏐🏉🎱🏓🏸🥅🏒")
+        let faceTheme = Theme(themeName: "Face", backgroundColor: .yellow, cardBackColor: .white, emojiChoices: "😀😃😄😁😆😅😂🤣☺️😊😇🙂")
+        let carTheme = Theme(themeName: "Car", backgroundColor: .black, cardBackColor:.gray, emojiChoices: "🚗🚕🚙🚌🚎🏎🚓🚑🚒🚐🚚🚛")
+        let flagTheme = Theme(themeName: "Flag", backgroundColor: .white, cardBackColor: .darkGray, emojiChoices: "🇰🇷🇯🇵🏳️🏴🏁🚩🏳️‍🌈🇱🇷🎌🇨🇦🇳🇵🇬🇪")
+        let fruitTheme = Theme(themeName: "Fruit", backgroundColor: .green, cardBackColor: .yellow, emojiChoices: "🍏🍎🍐🍊🍋🍌🍉🍇🍓🍈🍒🍑")
         themeList+=[animalTheme,sportTheme,faceTheme,carTheme,flagTheme,fruitTheme]
     }
     

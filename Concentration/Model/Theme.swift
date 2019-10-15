@@ -12,9 +12,9 @@ class Theme{
     var themeName:String
     var backgroundColor:UIColor
     var cardBackColor:UIColor
-    var emojiChoices:[String]
+    var emojiChoices:String
     
-    init(themeName:String,backgroundColor:UIColor,cardBackColor:UIColor,emojiChoices:[String]) {
+    init(themeName:String,backgroundColor:UIColor,cardBackColor:UIColor,emojiChoices:String) {
         self.themeName = themeName
         self.backgroundColor = backgroundColor
         self.cardBackColor = cardBackColor
