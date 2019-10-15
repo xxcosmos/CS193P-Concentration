@@ -11,11 +11,32 @@ import Foundation
 class Concentraton {
     
     // Card 结构体数组
-    var cards = [Card]()
-    var flipCount = 0
-    var score = 0
-    // Optional 可选
-    var indexOfOneAndOnlyFaceUpCard: Int?
+    private(set) var cards = [Card]()
+    private(set) var flipCount = 0
+    private(set) var score = 0
+    
+    // MARK：Optional 可选 computed 计算属性
+    private var indexOfOneAndOnlyFaceUpCard: Int? {
+        get{
+            var foundIndex:Int?
+            for index in cards.indices{
+                if cards[index].isFaceUp{
+                    if foundIndex == nil {
+                        foundIndex = index
+                    } else {
+                        return nil
+                    }
+                }
+            }
+            return foundIndex
+        }
+        
+        set {
+            for index in cards.indices{
+                cards[index].isFaceUp = (index == newValue)
+            }
+        }
+    }
     
     func chooseCard(at index: Int) {
         // 当前选择的牌已经匹配
@@ -31,8 +52,6 @@ class Concentraton {
             }
             flipCount+=1
             cards[index].isFaceUp = true
-            indexOfOneAndOnlyFaceUpCard = nil
-            
             if cards[matchIndex].identifier == cards[index].identifier{
                 score+=2
                 cards[matchIndex].isMatched = true
@@ -49,25 +68,19 @@ class Concentraton {
             }
             
         }else{
-            for index in cards.indices{
-                cards[index].isFaceUp = false
-            }
             // 翻的是第一张牌
             flipCount+=1
-            cards[index].isFaceUp = true
             indexOfOneAndOnlyFaceUpCard = index
-            
-            
         }
-        
     }
+    
     init(numberOfPairsOfCards:Int) {
         for _ in 1...numberOfPairsOfCards{
             let card = Card()
             cards += [card,card]
         }
         
-        //TODO: Shuffle the cards
+        //MARK: Shuffle the cards
         for _ in 1...500{
             let randomIndex = CommonUtil.getRandomInt(in: cards.count)
             cards.append(cards.remove(at: randomIndex))

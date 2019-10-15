@@ -15,10 +15,10 @@ struct Card {
     var identifier: Int
     
     // 静态成员变量
-    static var identifierFactor = 0
+    private static var identifierFactor = 0
     
     // 静态方法
-    static func getUniqueIdentifier() -> Int{
+    private static func getUniqueIdentifier() -> Int{
         identifierFactor+=1
         return identifierFactor
     }

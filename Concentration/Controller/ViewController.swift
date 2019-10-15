@@ -11,22 +11,22 @@ import UIKit
 class ViewController: UIViewController {
     
     // important lazy
-    lazy var game = Concentraton()
+    private lazy var game = Concentraton()
     
-    var emojiChoices = [String]()
-    var theme:Theme?
-    var emoji = [Int:String]()
-    var themeList = [Theme]()
- 
-
+    private var emojiChoices = [String]()
+    private var theme:Theme?
+    private var emoji = [Int:String]()
+    private var themeList = [Theme]()
     
-    @IBOutlet weak var flipCountLabel: UILabel!
-    @IBOutlet weak var themeLabel: UILabel!
-    @IBOutlet weak var scoreLabel: UILabel!
     
-    @IBOutlet var cardButtons: [UIButton]!
     
-    @IBAction func newGame() {
+    @IBOutlet private weak var flipCountLabel: UILabel!
+    @IBOutlet private weak var themeLabel: UILabel!
+    @IBOutlet private weak var scoreLabel: UILabel!
+    
+    @IBOutlet private var cardButtons: [UIButton]!
+    
+    @IBAction private func newGame() {
         let randomIndex = CommonUtil.getRandomInt(in: themeList.count)
         theme = themeList[randomIndex]
         view.backgroundColor = theme!.backgroundColor
@@ -38,7 +38,7 @@ class ViewController: UIViewController {
         
     }
     
-    @IBAction func touchButton(_ sender: UIButton) {
+    @IBAction private func touchButton(_ sender: UIButton) {
         if let cardNumber = cardButtons.index(of: sender) {
             game.chooseCard(at: cardNumber)
             updataViewFromModel()
@@ -48,7 +48,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func updataViewFromModel() {
+    private func updataViewFromModel() {
         flipCountLabel.text = "Flips: \(game.flipCount)"
         scoreLabel.text = "Score: \(game.score)"
         for index in cardButtons.indices{
@@ -71,14 +71,15 @@ class ViewController: UIViewController {
         }
     }
     
-    func emoji(for card: Card) -> String {
+    private func emoji(for card: Card) -> String {
         if emoji[card.identifier] == nil,emojiChoices.count>0 {
             let randomIndex = CommonUtil.getRandomInt(in: emojiChoices.count)
             emoji[card.identifier] = emojiChoices.remove(at: randomIndex)
         }
         return emoji[card.identifier] ?? "?"
     }
-    func themeInit() {
+    
+    private func themeInit() {
         let animalTheme = Theme(themeName: "Animal", backgroundColor: .orange, cardBackColor: .red, emojiChoices: ["🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", "🐨", "🐯", "🦁", "🐮"])
         let sportTheme = Theme(themeName: "Sport", backgroundColor: .blue, cardBackColor: .green, emojiChoices: ["⚽️", "🏀", "🏈", "⚾️", "🎾", "🏐", "🏉", "🎱", "🏓", "🏸", "🥅", "🏒"])
         let faceTheme = Theme(themeName: "Face", backgroundColor: .yellow, cardBackColor: .white, emojiChoices: ["😀", "😃", "😄", "😁", "😆", "😅", "😂", "🤣", "☺️", "😊", "😇", "🙂"])
@@ -92,6 +93,7 @@ class ViewController: UIViewController {
         themeList.append(sportTheme)
         themeList.append(animalTheme)
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -105,7 +107,5 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
 }
 
