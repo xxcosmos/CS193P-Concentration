@@ -39,6 +39,7 @@ class Concentraton {
     }
     
     func chooseCard(at index: Int) {
+        assert(cards.indices.contains(index), "Concentration.chooseCard(at:\(index)):chosen index not in the cards")
         // 当前选择的牌已经匹配
         if cards[index].isMatched{
             return
@@ -82,7 +83,7 @@ class Concentraton {
         
         //MARK: Shuffle the cards
         for _ in 1...500{
-            let randomIndex = CommonUtil.getRandomInt(in: cards.count)
+            let randomIndex = cards.count.arc4random()
             cards.append(cards.remove(at: randomIndex))
             
         }

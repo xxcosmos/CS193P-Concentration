@@ -27,7 +27,7 @@ class ViewController: UIViewController {
     @IBOutlet private var cardButtons: [UIButton]!
     
     @IBAction private func newGame() {
-        let randomIndex = CommonUtil.getRandomInt(in: themeList.count)
+        let randomIndex = themeList.count.arc4random()
         theme = themeList[randomIndex]
         view.backgroundColor = theme!.backgroundColor
         emojiChoices = theme!.emojiChoices
@@ -73,7 +73,7 @@ class ViewController: UIViewController {
     
     private func emoji(for card: Card) -> String {
         if emoji[card.identifier] == nil,emojiChoices.count>0 {
-            let randomIndex = CommonUtil.getRandomInt(in: emojiChoices.count)
+            let randomIndex = emojiChoices.count.arc4random()
             emoji[card.identifier] = emojiChoices.remove(at: randomIndex)
         }
         return emoji[card.identifier] ?? "?"
@@ -86,12 +86,7 @@ class ViewController: UIViewController {
         let carTheme = Theme(themeName: "Car", backgroundColor: .black, cardBackColor:.gray, emojiChoices: ["🚗", "🚕", "🚙", "🚌", "🚎", "🏎", "🚓", "🚑", "🚒", "🚐", "🚚", "🚛"])
         let flagTheme = Theme(themeName: "Flag", backgroundColor: .white, cardBackColor: .darkGray, emojiChoices: ["🇰🇷", "🇯🇵", "🏳️", "🏴", "🏁", "🚩", "🏳️‍🌈", "🇱🇷", "🎌", "🇨🇦", "🇳🇵", "🇬🇪"])
         let fruitTheme = Theme(themeName: "Fruit", backgroundColor: .green, cardBackColor: .yellow, emojiChoices: ["🍏", "🍎", "🍐", "🍊", "🍋", "🍌", "🍉", "🍇", "🍓", "🍈", "🍒", "🍑"])
-        themeList.append(fruitTheme)
-        themeList.append(flagTheme)
-        themeList.append(carTheme)
-        themeList.append(faceTheme)
-        themeList.append(sportTheme)
-        themeList.append(animalTheme)
+        themeList+=[animalTheme,sportTheme,faceTheme,carTheme,flagTheme,fruitTheme]
     }
     
     override func viewDidLoad() {
