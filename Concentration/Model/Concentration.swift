@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Concentraton {
+struct Concentraton {
     
     // Card 结构体数组
     private(set) var cards = [Card]()
@@ -18,17 +18,7 @@ class Concentraton {
     // MARK：Optional 可选 computed 计算属性
     private var indexOfOneAndOnlyFaceUpCard: Int? {
         get{
-            var foundIndex:Int?
-            for index in cards.indices{
-                if cards[index].isFaceUp{
-                    if foundIndex == nil {
-                        foundIndex = index
-                    } else {
-                        return nil
-                    }
-                }
-            }
-            return foundIndex
+            return cards.indices.filter{cards[$0].isFaceUp==true}.oneAndOnly
         }
         
         set {
@@ -38,8 +28,8 @@ class Concentraton {
         }
     }
     
-    func chooseCard(at index: Int) {
-        assert(cards.indices.contains(index), "Concentration.chooseCard(at:\(index)):chosen index not in the cards")
+    mutating func chooseCard(at index: Int) {
+        assert(cards.indices.contains(index), "(at:\(index)):chosen index not in the cards")
         // 当前选择的牌已经匹配
         if cards[index].isMatched{
             return
@@ -85,7 +75,6 @@ class Concentraton {
         for _ in 1...500{
             let randomIndex = cards.count.arc4random()
             cards.append(cards.remove(at: randomIndex))
-            
         }
     }
     
